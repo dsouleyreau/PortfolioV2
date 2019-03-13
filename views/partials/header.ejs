@@ -1,0 +1,22 @@
+        <nav class="navbar navbar-default navigation-clean-button">
+            <div class="container">
+                <div class="navbar-header"><a class="navbar-brand" href="/"><%= locals.appName %></a>
+                </div>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="/">PortfolioV1</a></li>
+                        <li><a href="/merchant">Merchant</a></li>
+                    </ul>
+                    <p class="navbar-text navbar-right">
+                        <% if (typeof(user) == 'undefined') { %>
+                        <a class="navbar-link login" href="/auth/login">Connexion</a>
+                        <a class="btn btn-default" href="/auth/signup">Inscription</a>
+                        <% } else { %>
+                        <a class="btn btn-default" href='/profile'><%= user.local.name || user.facebook.name || user.google.name %></a>
+                        <% } %>
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="content">

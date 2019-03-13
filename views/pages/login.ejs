@@ -1,0 +1,44 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <% include ../partials/header %>
+
+        <div class="container">
+
+            <div class="col-sm-6 col-sm-offset-3">
+
+                <h1><span class="fa fa-sign-in"></span> Page de connexion</h1>
+
+                <!-- show any messages that come back with authentication -->
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+
+                <!-- LOGIN FORM -->
+                <form action="/auth/login" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Connexion</button>
+                </form>
+
+                <hr>
+
+                <p>Pas encore de compte ? <a href="/auth/signup">Inscription</a></p>
+                <p>Ami de Facebok ou de Google ? <a href="/auth/signup">Authentification</a></p>
+                <p>Retour à l'<a href="/auth">Accueil</a></p>
+
+            </div>
+        </div>
+
+        <% include ../partials/footer %>
+    </body>
+</html>

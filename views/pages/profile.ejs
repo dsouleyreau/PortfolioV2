@@ -1,0 +1,56 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <% include ../partials/header %>
+
+        <div class="container">
+
+            <div class="page-header text-center">
+                <h1 class="title"><span class="fa fa-anchor"></span> Profile</h1>
+                <a href="/auth/logout" class="btn btn-default btn-sm">Déconnexion</a>
+            </div>
+            
+            <div class="row">
+                <!-- LOCAL INFORMATION -->
+                <div class="col-sm-6">
+                    <div class="well">
+                    <!-- LOCAL INFORMATION -->
+                    <% if(user && user.local && user.local != '{}') { %>
+                        <h2><span class="fa fa-user"></span> Local</h2>
+
+                        <p>
+                            <strong>id</strong>: <%= user.local.id %><br>
+                            <strong>email</strong>: <%= user.local.email %><br>
+                            <strong>nom</strong>: <%= user.local.name %>
+                        </p>
+                    <% } %>
+
+                    <!-- FACEBOOK INFORMATION -->
+                    <% if(user && user.facebook && user.facebook != '{}') { %>
+                        <h2 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h2>
+                        <p>
+                            <strong>id</strong>: <%= user.facebook.id %><br>
+                            <strong>email</strong>: <%= user.facebook.email %><br>
+                            <strong>nom</strong>: <%= user.facebook.name %><br>
+                        </p>
+                    <% } %>
+
+                    <!-- GOOGLE INFORMATION -->
+                    <% if(user && user.google && user.google != '{}') { %>
+                        <h2 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h2>
+                        <p>
+                            <strong>id</strong>: <%= user.google.id %><br>
+                            <strong>email</strong>: <%= user.google.email %><br>
+                            <strong>nom</strong>: <%= user.google.name %>
+                        </p>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include ../partials/footer %>
+    </body>
+</html>

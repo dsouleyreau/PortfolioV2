@@ -1,0 +1,47 @@
+<!-- views/signup.ejs -->
+<!doctype html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <% include ../partials/header %>
+
+        <div class="container">
+
+            <div class="col-sm-6 col-sm-offset-3">
+
+                <h1><span class="fa fa-sign-in"></span> Inscription</h1>
+
+                <!-- show any messages that come back with authentication -->
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+
+                <!-- LOGIN FORM -->
+                <form action="/auth/signup" method="post">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" class="form-control" name="name">
+                    </div>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Inscription</button>
+                </form>
+
+                <hr>
+
+                <p>Déjà inscrit ? <a href="/auth/login">S'enregistrer</a></p>
+                <p>Retour à l'<a href="/auth">Accueil</a></p>
+
+            </div>
+        </div>
+
+        <% include ../partials/footer %>
+    </body>
+</html>

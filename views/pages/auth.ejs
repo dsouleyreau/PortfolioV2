@@ -1,0 +1,27 @@
+<!-- views/auth.ejs -->
+<!doctype html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <% include ../partials/header %>
+
+        <div class="container">
+            
+            <div class="jumbotron text-center">
+                <h2><span class="fa fa-lock"></span> Authentification</h2>
+                <p>Se connecter ou s'enregistrer avec :</p>
+                <div class="login">
+                    <a href="/auth/login" class="btn btn-default local-login"><span class="fa fa-user"></span> Connexion Locale</a>
+                    <a href="/auth/signup" class="btn btn-default local-signup"><span class="fa fa-user"></span> Inscription Locale</a>
+                </div>
+                <div class="login">
+                    <a href="/auth/facebook" class="btn btn-primary facebook"><span class="fa fa-facebook"></span> Connexion Facebook</a>
+                    <a href="/auth/google" class="btn btn-danger google"><span class="fa fa-google-plus"></span> Connexion Google</a>
+                </div>
+            </div>
+
+        </div>
+
+        <% include ../partials/footer %>
+    </body>
+</html>

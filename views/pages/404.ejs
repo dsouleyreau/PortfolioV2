@@ -1,0 +1,27 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <% include ../partials/header %>
+
+        <div class="container">
+
+            <div class="col-sm-6 col-sm-offset-3">
+
+                <h1>404 <span class="fa fa-exclamation"></span></h1>
+
+                <div class="alert alert-danger"><strong>/<%= link %></strong> introuvable.</div>
+
+                <hr>
+
+                <p>Créer un compte ? <a href="/auth/signup">Inscription</a></p>
+                <p>Se connecter autrement ? <a href="/auth/signup">Connexion</a></p>
+                <p>Retour à l'<a href="/auth"></a>Accueil</p>
+
+            </div>
+        </div>
+
+        <% include ../partials/footer %>
+    </body>
+</html>

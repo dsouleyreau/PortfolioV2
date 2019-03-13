@@ -1,3 +1,4 @@
 ca_bundle.crt
 certificate.crt
 private.key
+secrets.js #exporter vos mots de passe
