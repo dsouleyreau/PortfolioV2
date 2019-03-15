@@ -34,10 +34,6 @@ module.exports = function(router, passport){
 		failureRedirect: '/auth/signup',
 		failureFlash: true
 	}));
-
-	// router.get('/profile', isLoggedIn, function(req, res){
-	// 	res.render('pages/profile.ejs', { user: req.user });
-	// });
 	
 	router.get('/facebook', passport.authenticate('facebook',  {scope: ['email']}));
 

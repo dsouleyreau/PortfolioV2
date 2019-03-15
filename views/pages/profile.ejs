@@ -13,7 +13,6 @@
             </div>
             
             <div class="row">
-                <!-- LOCAL INFORMATION -->
                 <div class="col-sm-6">
                     <div class="well">
                     <!-- LOCAL INFORMATION -->
@@ -21,7 +20,7 @@
                         <h2><span class="fa fa-user"></span> Local</h2>
 
                         <p>
-                            <strong>id</strong>: <%= user.local.id %><br>
+<!--                            <strong>id</strong>: <%= user.local.id %><br>-->
                             <strong>email</strong>: <%= user.local.email %><br>
                             <strong>nom</strong>: <%= user.local.name %>
                         </p>
@@ -31,7 +30,7 @@
                     <% if(user && user.facebook && user.facebook != '{}') { %>
                         <h2 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h2>
                         <p>
-                            <strong>id</strong>: <%= user.facebook.id %><br>
+<!--                            <strong>id</strong>: <%= user.facebook.id %><br>-->
                             <strong>email</strong>: <%= user.facebook.email %><br>
                             <strong>nom</strong>: <%= user.facebook.name %><br>
                         </p>
@@ -41,7 +40,7 @@
                     <% if(user && user.google && user.google != '{}') { %>
                         <h2 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h2>
                         <p>
-                            <strong>id</strong>: <%= user.google.id %><br>
+<!--                            <strong>id</strong>: <%= user.google.id %><br>-->
                             <strong>email</strong>: <%= user.google.email %><br>
                             <strong>nom</strong>: <%= user.google.name %>
                         </p>

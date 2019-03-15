@@ -1,0 +1,17 @@
+In this folder, you have to include ;
+	ca_bundle.crt
+	certificate.crt
+	private.key
+	secrets.js
+
+secrets.js is built like this :
+
+module.exports = {
+    hashingSecret: '<local secret>',
+    facebook : {
+        clientSecret: '<facebook app clientSecret>'
+    },
+    google : {
+        clientSecret: '<facebook app clientSecret>'
+    }
+};

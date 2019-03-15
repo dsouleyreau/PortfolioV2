@@ -1,6 +1,5 @@
 module.exports = function(router, passport){
 
-	//localhost:8080/auth/
     router.use(function(req, res, next){
         next();
     });

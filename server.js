@@ -12,10 +12,9 @@ var fs = require('fs')
 
 var express = require('express')
   , app = express()
-
   , cookieParser = require('cookie-parser')
   , session = require('express-session')
-  , morgan = require('morgan')
+  , logger = require('morgan')
   , mongoose = require('mongoose')
   , bodyParser = require('body-parser')
   , helmet = require('helmet')
@@ -37,7 +36,9 @@ require('./config/passport')(passport);
 /* * * * * * * * */
 
 /* Middlewares */
-app.use(morgan('dev'))
+
+app.set('trust proxy', true)
+   .use(logger(':date[iso] :remote-addr :method :url :status :res[content-length] - :response-time ms'))
    .use(cookieParser())
    .use(bodyParser.urlencoded({ extended: false }))
    .use(session(
@@ -61,20 +62,16 @@ app.use(morgan('dev'))
    .use(helmet())
 
    .use(function(req, res, next){
-//       console.log('req ' + req.user);
        next();
    })
    .use(function (req, res, next) {
        res.locals = Object.assign(res.locals, config.templateGlobals, {url : req.path.split('/')[1]});
-       console.log(res.locals);
-//       res.locals = config;
        next();
     })
     .use('/public', express.static(path.join(__dirname,'./public')))
     .use('/.well-known', express.static(path.join(__dirname,'./.well-known')))
 
     .set('view engine', 'ejs');
-//app.locals.config = config;
 /* * * * * * * */
 
 /* Routes */
@@ -91,9 +88,8 @@ require('./app/routes/secure')(secure, passport);
 app.use('/', secure);
 
 app.get('/:notFound', function(req, res){
-    res.render('pages/404.ejs', { link : req.params.notFound });
+    res.status(404).render('pages/404.ejs', { link : req.params.notFound });
 });
-//require('./app/routes.js')(app);
 
 /* * * * * */
 

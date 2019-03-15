@@ -3,6 +3,8 @@
  *
  */
 
+var secrets = require('../https/secrets');
+
 // Container for all environments
 var environments = {};
 
@@ -11,7 +13,7 @@ environments.staging = {
   'httpPort' : 3000,
   'httpsPort' : 3001,
   'envName' : 'staging',
-  'hashingSecret' : require('../https/secrets.js').hashingSecret,
+  'hashingSecret' : secrets.hashingSecret,
   'templateGlobals' : {
     'appName' : 'PortfolioV2',
     'companyName' : 'Dorian Souleyreau',
@@ -30,7 +32,7 @@ environments.production = {
   'httpPort' : 80,
   'httpsPort' : 443,
   'envName' : 'production',
-  'hashingSecret' : require('../https/secrets.js').hashingSecret,
+  'hashingSecret' : secrets.hashingSecret,
   'templateGlobals' : {
     'appName' : 'PortfolioV2',
     'companyName' : 'Dorian Souleyreau',

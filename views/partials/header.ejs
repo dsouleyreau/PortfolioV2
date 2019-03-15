@@ -10,7 +10,7 @@
                     </ul>
                     <p class="navbar-text navbar-right">
                         <% if (typeof(user) == 'undefined') { %>
-                        <a class="navbar-link login" href="/auth/login">Connexion</a>
+                        <a class="navbar-link login" href="/auth">Connexion</a>
                         <a class="btn btn-default" href="/auth/signup">Inscription</a>
                         <% } else { %>
                         <a class="btn btn-default" href='/profile'><%= user.local.name || user.facebook.name || user.google.name %></a>
