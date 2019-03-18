@@ -1,21 +1,19 @@
-html, body {
-  height: 100%;
+html {
+    height: 100%;
 }
 
 body {
     word-wrap: break-word;
+    height: 100%;
 }
+
+.container {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .login .btn {
     margin: 10px auto;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
-  flex-grow: 1;
 }
 
 #myFooter {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devserver": "node node_modules/nodemon/bin/nodemon.js --inspect server.js",
-    "prodserver": "node node_modules/nodemon/bin/nodemon.js --inspect server.js"
+    "prodserver": "NODE_ENV=production node node_modules/nodemon/bin/nodemon.js --inspect server.js"
   },
   "repository": {
     "type": "git",
