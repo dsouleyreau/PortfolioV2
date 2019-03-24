@@ -9,12 +9,12 @@ module.exports = function(router, passport){
     });
     
 	router.get('/', function(req, res){
-		res.render('pages/auth.ejs');
+		res.render('pages/auth/auth.ejs');
 	});
 	
 	//localhost:8080/auth/login
 	router.get('/login', function(req, res){
-		res.render('pages/login.ejs', { message: req.flash('loginMessage') });
+		res.render('pages/auth/login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	router.post('/login', passport.authenticate('local-login', {
@@ -25,7 +25,7 @@ module.exports = function(router, passport){
 
 	//localhost:8080/auth/signup
 	router.get('/signup', function(req, res){
-		res.render('pages/signup.ejs', { message: req.flash('signupMessage') });
+		res.render('pages/auth/signup.ejs', { message: req.flash('signupMessage') });
 	});
 
 
@@ -45,6 +45,12 @@ module.exports = function(router, passport){
 
 	router.get('/google/callback', 
 	  passport.authenticate('google', { successRedirect: '/profile',
+	                                      failureRedirect: '/' }));
+
+	router.get('/linkedin', passport.authenticate('linkedin'));
+
+	router.get('/linkedin/callback', 
+	  passport.authenticate('linkedin', { successRedirect: '/profile',
 	                                      failureRedirect: '/' }));
 
 	router.get('/logout', function(req, res){

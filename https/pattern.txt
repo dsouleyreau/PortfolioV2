@@ -14,4 +14,7 @@ module.exports = {
     google : {
         clientSecret: '<facebook app clientSecret>'
     }
+    linkedin : {
+        clientSecret: '<facebook app clientSecret>'
+    }
 };

@@ -82,6 +82,10 @@ body {
 	color:#ef1a1a;
 }
 
+#myFooter .linkedin:hover{
+	color: #00aced;
+}
+
 #myFooter .twitter:hover{
 	color: #00aced;
 }

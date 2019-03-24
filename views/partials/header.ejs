@@ -24,7 +24,7 @@
                         <a class="navbar-link login" href="/auth">Connexion</a>
                         <a class="btn btn-default action-button" href="/auth/signup">Inscription</a>
                         <% } else { %>
-                        <a class="btn btn-default action-button" href='/profile'><%= user.local.name || user.facebook.name || user.google.name %></a>
+                        <a class="btn btn-default action-button" href='/profile'><%= user.name %></a>
                         <% } %>
                     </p>
                 </div>

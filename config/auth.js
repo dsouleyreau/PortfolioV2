@@ -11,5 +11,11 @@ module.exports = {
 		'clientID': '682584466606-ss5ibmsg2jfc4ktjrcoma7g1ljndqqub.apps.googleusercontent.com',
 		'clientSecret': secrets.google.clientSecret,
 		'callbackURL': 'https://doriansouleyreau.fr/auth/google/callback'
+	},
+
+	'linkedInAuth' : {
+		'clientID': '7865lbefkahsq8',
+		'clientSecret': secrets.linkedin.clientSecret,
+		'callbackURL': 'https://doriansouleyreau.fr/auth/linkedin/callback'
 	}
 }
