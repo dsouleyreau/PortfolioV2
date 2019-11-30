@@ -1,0 +1,192 @@
+@font-face {
+	font-family: "merchant_font";
+	src: url("alagard.ttf");
+}
+
+body {
+	image-rendering: pixelated;
+	image-rendering: optimizespeed;
+	background-color: #5C4F40;
+	font-family: "merchant_font";
+	cursor: default;
+	color: #000000;
+	zoom: 120%;
+}
+
+#main_title {
+	margin-top: 20px;
+	font-size: 62px;
+	-webkit-font-smoothing: none;
+}
+
+#container {
+	margin-top: -10px;
+	top: 0px;
+	height: 2800px;
+	width: 600px;
+	overflow: hidden;
+	background-image: url('../images/bg.png');
+	background-repeat: repeat-y;
+	background-size: 100%;
+}
+
+.buttons {
+	background-image: url('../images/box1.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	cursor: pointer;
+}
+
+.buttons:hover{
+	background-image: url('../images/box2.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+header {
+	margin-top: -50px;
+	width: 600px;
+	border: 1px solid transparent;
+}
+
+#container header div {
+	float: left;
+	border: 1px solid transparent;
+	display: inline-block;
+	margin: 0px;
+	height: 50px;
+	width: 280px;
+}
+
+#container header div p{
+	border: 1px solid transparent;
+	margin-top: 11px;
+	font-size: 28px;
+}
+
+#form_link {
+	margin: 0px;
+	height: 48px;
+	width: 279px;
+	position: absolute;
+	margin-top: -70px;
+	margin-left: -140px;
+}
+
+
+.separator {
+	margin: 0px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	width: 450px;
+}
+
+#container header div:hover #instructions{
+	display: block;
+	background-image: url('../images/instructions.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+#container article {
+	margin: 20px;
+	margin-left: 18px;
+	margin-top: 70px;
+	width: 480px;
+	height: 1800px;
+	border: 1px solid transparent;
+}
+
+#liens {
+	margin: 10px;
+	padding-bottom: 10px;
+	border: 0px solid transparent;
+	text-align: left;
+	font-size: 22px;
+}
+
+#liens li {
+	margin: 4px;
+}
+
+#liens li a{
+	color: #000000;
+	text-decoration: none;
+}
+
+#liens li a:hover {
+	color: #86181E;
+	transition: 0.1s
+}
+
+article div {
+	margin: 10px;
+	border: 0px solid transparent;
+	text-align: left;
+}
+
+.article_title {
+	font-size: 28px;
+	margin: 0px;
+}
+
+#histoire p:last-child {
+	margin: 20px;
+	font-size: 17.5px;
+	text-align: justify;
+}
+
+.perso_box {
+	border: 1px solid #5C4F40;
+	background-color: #A9987C;
+	-moz-box-shadow: inset 0px 0px 5px 1px #656565;
+	-webkit-box-shadow: inset 0px 0px 5px 1px #656565;
+	-o-box-shadow: inset 0px 0px 5px 1px #656565;
+	box-shadow: inset 0px 0px 5px 1px #656565;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=20);
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.perso_box img {
+	margin: 5px;
+	margin-bottom: 2px;
+	margin-left: 12px;
+	height: 70px;
+	width: 70px;
+}
+
+.perso_box p {
+	width: 320px;
+	margin-right: 10px;
+	height: 50px;
+	float: right;
+}
+
+#jouer p{
+	
+	text-align: justify;
+}
+
+#download {
+	padding: 12px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 3px;
+	color: #000000;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,9 @@
 <!-- views/pages/index.ejs -->
 <!doctype html>
 <html>
-    <% include ../partials/head %>
+    <%- include(locals.rootPath + '/partials/head') %>
     <body>
-        <% include ../partials/header %>
+        <%- include(locals.rootPath + '/partials/header') %>
 
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="well">
@@ -11,7 +11,7 @@
                     <ul>
                         <li>Est accessible en HTTPS seulement, avec un certificat valide</li>
                         <li>Possède un nom de domaine, comme tous les sites à volonté publique</li>
-                        <li>Permet de se créer un compte ou de se connecter par plusieurs moyens</li>
+                        <li>Permet de créer un compte ou de se connecter par plusieurs moyens</li>
                     </ul>
                     <h2>Ce que vous ne pouvez pas voir</h2>
                     <ul>
@@ -45,6 +45,6 @@
 
             </div>
 
-        <% include ../partials/footer %>
+        <%- include(locals.rootPath + '/partials/footer') %>
     </body>
 </html>

@@ -1,9 +1,9 @@
-<!-- views/pages/login.ejs -->
+<!-- views/pages/404.ejs -->
 <!doctype html>
 <html>
-    <% include ../partials/head %>
+    <%- include(locals.rootPath + '/partials/head') %>
     <body>
-        <% include ../partials/header %>
+        <%- include(locals.rootPath + '/partials/header') %>
 
             <div class="col-sm-6 col-sm-offset-3">
 
@@ -12,13 +12,13 @@
                 <div class="alert alert-danger"><strong>/<%= link %></strong> introuvable.</div>
 
                 <hr>
-
-                <p>Créer un compte ? <a href="/auth/signup">Inscription</a></p>
-                <p>Se connecter autrement ? <a href="/auth/signup">Connexion</a></p>
-                <p>Retour à l'<a href="/auth"></a>Accueil</p>
+                
+                <p>Pas encore de compte ? <a href="/auth/signup">S'enregistrer</a></p>
+                <p>Ami de Facebok ou de Google ? <a href="/auth">Se connecter</a></p>
+                <p>Retourner à l'<a href="/">Accueil</a></p>
 
             </div>
 
-        <% include ../partials/footer %>
+        <%- include(locals.rootPath + '/partials/footer') %>
     </body>
 </html>

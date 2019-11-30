@@ -1,9 +1,9 @@
 <!-- views/pages/signup.ejs -->
 <!doctype html>
 <html>
-    <% include ../../partials/head %>
+    <%- include(locals.rootPath + '/partials/head') %>
     <body>
-        <% include ../../partials/header %>
+        <%- include(locals.rootPath + '/partials/header') %>
 
             <div class="col-sm-6 col-sm-offset-3">
 
@@ -35,10 +35,10 @@
                 <hr>
 
                 <p>Déjà inscrit ? <a href="/auth/login">S'enregistrer</a></p>
-                <p>Retour à l'<a href="/auth">Accueil</a></p>
+                <p>Retour à l'<a href="/">Accueil</a></p>
 
             </div>
 
-        <% include ../../partials/footer %>
+        <%- include(locals.rootPath + '/partials/footer') %>
     </body>
 </html>

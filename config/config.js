@@ -10,20 +10,19 @@ var environments = {};
 
 // Staging (default) environment
 environments.staging = {
-  'httpPort' : 3000,
-  'httpsPort' : 3001,
+  'httpPort' : 80,
+  'httpsPort' : 443,
   'envName' : 'staging',
   'hashingSecret' : secrets.hashingSecret,
   'templateGlobals' : {
-    'appName' : 'PortfolioV2',
+    'appName' : 'PF V2',
     'companyName' : 'Dorian Souleyreau',
     'yearCreated' : '2019',
     'baseUrl' : '/',
-    'siteUrl': 'https://doriansouleyreau.fr:3001'
+    'siteUrl': 'https://doriansouleyreau.fr'
   },
   'dbConfig' : {
-	'url': 'mongodb://192.168.1.24:27017/portfolioV2',
-    'parser': {'useNewUrlParser': true}
+	'url': 'mongodb://127.0.0.1:27017/portfolioV2'
   },
 };
 
@@ -41,13 +40,13 @@ environments.production = {
     'siteUrl': 'https://doriansouleyreau.fr'
   },
   'dbConfig' : {
-	'url': 'mongodb://192.168.1.24:27017/portfolioV2',
-    'parser': {'useNewUrlParser': true}
+	'url': 'mongodb://192.168.1.24:27017/portfolioV2'
   },
 };
 
 // Determine which environment was passed as a command-line argument
-var currentEnvironment = typeof(process.env.NODE_ENV) == 'string' ? process.env.NODE_ENV.toLowerCase() : 'production';
+var env = process.argv.slice(-1)[0];
+var currentEnvironment = typeof(env) == 'string' ? env.toLowerCase() : 'staging';
 
 // Check that the current environment is one of the environments above, if not default to staging
 var environmentToExport = typeof(environments[currentEnvironment]) == 'object' ? environments[currentEnvironment] : environments.staging;

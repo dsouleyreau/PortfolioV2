@@ -11,21 +11,33 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Apps
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projets en cours
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/merchant">Merchant</a></li>
+                                <li><a href="/projects/merchant">Merchant</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Projets effectués
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/projects/raspi">Contrôle à distance</a></li>
+                                <li><a href="/projects/wizard-escape">Wizard Escape</a></li>
                             </ul>
                         </li>
                         <li><a href="https://github.com/DodoDye/Portfolio">PortfolioV1</a></li>
                     </ul>
-                    <p class="navbar-text navbar-right">
-                    <% if (typeof(user) == 'undefined') { %>
-                        <a class="navbar-link login" href="/auth">Connexion</a>
-                        <a class="btn btn-default action-button" href="/auth/signup">Inscription</a>
-                        <% } else { %>
-                        <a class="btn btn-default action-button" href='/profile'><%= user.name %></a>
-                        <% } %>
+                    <p class="navbar-text navbar-right profile">
+                    <% if (typeof(locals.user) == 'undefined') { %>
+                        <a class="btn btn-default action-button connect" href="/auth">Connexion</a>
+                    <% } else { %>
+                        <a class="btn btn-default action-button user" href='/profile'>
+                            <% if (typeof(locals.user.image) != 'undefined') { %>
+                                <img src="<%= locals.user.image %>" />
+                            <% } %>
+                            <%= locals.user.name %>
+                        </a>
+                    <% } %>
                     </p>
                 </div>
             </div>

@@ -1,0 +1,30 @@
+<!-- views/pages/public/projects/raspi.ejs -->
+<!doctype html>
+<html>
+    <%- include(locals.rootPath + '/partials/head') %>
+    <body>
+        <%- include(locals.rootPath + '/partials/header') %>
+
+            <div class="jumbotron">
+                <h2>Contrôle à distance via Raspberry Pi</h2>
+                <p>
+                    En 1ere année de DUT R&amp;T, le projet Raspberry Pi était défini par :
+                    <ul>
+                        <li>Un Raspberry Pi 3, une carte SD vierge, du matériel nécessaire.</li>
+                        <li>Un projet de contrôle à distance.</li>
+                        <li>Une consigne de présenter le projet grâce à un serveur web.</li>
+                        <li>Un module spécifique au sujet "Contrôle à distance" : PiFace.</li>
+                    </ul>
+                <p>
+                    Après être passé par un serveur Apache/PHP, le développement s'est concentré sur un serveur Python.<br>
+                    La bibliothèque Python PiFace permettait de contrôler le module facilement.<br>
+                    Ce serveur Python permettait de ne charger le module qu'une seule fois.<br>
+                    Une page web était rendue avec un rendu de l'état des lumières du PiFace.<br>
+                    Un script JS lançait les requêtes de contrôle des lumières sens rafraîchir la page.<br>
+                    Ce système a servi de base à un projet de domotique pour un autre projet.<br>
+                </p>
+            </div>
+
+        <%- include(locals.rootPath + '/partials/footer') %>
+    </body>
+</html>

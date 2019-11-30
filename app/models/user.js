@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
     name: String,
     password: String,
     auth: String,
+    image: String,
 });
 
 userSchema.methods.generateHash = function(password){
@@ -16,11 +17,11 @@ userSchema.methods.generateHash = function(password){
 }
 
 userSchema.methods.validPassword = function(password){
-	return bcrypt.compareSync(password, this.local.password);
+	return bcrypt.compareSync(password, this.password);
 }
 
 userSchema.methods.generateId = function(){
-	return Math.random().toString().slice(2,18);
+	return Math.random().toString().slice(2,25);
 }
 
 userSchema.methods.generateToken = function(){

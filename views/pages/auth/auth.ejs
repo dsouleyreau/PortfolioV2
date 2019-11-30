@@ -1,9 +1,9 @@
 <!-- views/pages/auth.ejs -->
 <!doctype html>
 <html>
-    <% include ../../partials/head %>
+    <%- include(locals.rootPath + '/partials/head') %>
     <body>
-        <% include ../../partials/header %>
+        <%- include(locals.rootPath + '/partials/header') %>
             
             <div class="jumbotron text-center">
                 <h2><span class="fa fa-lock"></span> Authentification</h2>
@@ -19,6 +19,6 @@
                 </div>
             </div>
 
-        <% include ../../partials/footer %>
+        <%- include(locals.rootPath + '/partials/footer') %>
     </body>
 </html>

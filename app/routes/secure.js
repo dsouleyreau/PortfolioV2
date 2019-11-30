@@ -18,6 +18,6 @@ module.exports = function(router, passport){
 	});
 
 	router.get('/profile', function(req, res){
-		res.render('pages/profile.ejs', { user: req.user });
+		res.render('pages/profile.ejs');
 	});
 }
