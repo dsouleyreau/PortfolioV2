@@ -1,16 +1,16 @@
+/* Classes d'authentification */
+
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var LinkedInStrategy = require('passport-linkedin-api-v2').LinkedinAuth;
 
+/* * * * * * * */
+
 var User = require('../app/models/user');
 var configAuth = require('../https/secrets.js');
 
-
-/* TODO: Modifier pour avoir 1 utilisateur pour 1 compte (pas de liaison entre les comptes) */
-
 module.exports = function(passport) {
-
 
 	passport.serializeUser(function(user, done){
 		done(null, user.id);
@@ -31,24 +31,29 @@ module.exports = function(passport) {
 	function(req, email, password, done){
 		process.nextTick(function(){
 			User.findOne({'email': email, 'auth': 'local'}, function(err, user){
+                var name = req.body.name.trim();
 				if(err)
-					return done(err);
+					done(err, false, req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
 				else if(user)
-					return done(null, false, req.flash('signupMessage', 'Ce mail est déjà utilisé !'));
+					done(err, false, req.flash('errorMessage', 'Cette adresse email est déjà utilisée'));
+                else if(!password)
+					done(err, false, req.flash('errorMessage', 'Mot de passe non valide'));
+                else if(!name)
+					done(err, false, req.flash('errorMessage', 'Veuillez indiquer votre nom'));
                 else {
                     var newUser = new User();
-                    newUser.email = email;
+                    newUser.email = email.trim();
                     newUser.password = newUser.generateHash(password);
-                    newUser.name = req.body.name;
-                    newUser.user_id = newUser.generateId();
+                    newUser.name = name;
+                    newUser.auth_id = newUser.generateId();
                     newUser.token = newUser.generateToken();
                     newUser.auth = 'local';
 
                     newUser.save(function(err){
                         if(err)
-                            return done(err, null);
+					        done(err, false, req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                     });
-                    return done(null, newUser);
+                    done(null, newUser, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                 }
 			});
 		});
@@ -63,18 +68,18 @@ module.exports = function(passport) {
 			process.nextTick(function(){
                 User.findOne({ 'email': email, 'auth': 'local'}, function(err, user){
                     if(err)
-                        return done(err);
+					    done(err, false, req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                     else if(!user)
-                        return done(null, false, req.flash('loginMessage', 'Mail invalide'));
-                    else if(!user.validPassword(user.password))
-                        return done(null, false, req.flash('loginMessage', 'Mot de passe invalide'));
+                        done(null, false, req.flash('errorMessage', 'Adresse email invalide'));
+                    else if(!user.validPassword(password))
+                        done(null, false, req.flash('errorMessage', 'Mot de passe invalide'));
                     else {
                         user.token = user.generateToken();
                         user.save(function(err){
                             if(err)
-                                return done(err, null);
+					            done(err, false, req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         });
-                        return done(null, user);
+                        done(null, user, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                     }
                 });
 			});
@@ -92,9 +97,9 @@ module.exports = function(passport) {
 	    function(req, accessToken, refreshToken, profile, done) {
 	    	process.nextTick(function(){
 	    		//user is not logged in yet
-                User.findOne({'user_id': profile.id, 'auth': 'facebook'}, function(err, user){
+                User.findOne({'auth_id': profile.id, 'auth': 'facebook'}, function(err, user){
                     if(err)
-                        return done(err);
+                        done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                     else if(user){
                         user.token = accessToken;
                         user.name = profile.name.givenName + ' ' + profile.name.familyName;
@@ -102,13 +107,13 @@ module.exports = function(passport) {
                         user.image = profile.photos ? profile.photos[0].value : undefined;
                         user.save(function(err){
                             if(err)
-                                return done(err, null);
+                                done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         });
-                        return done(null, user);
+                        done(null, user, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                     }
                     else {
                         var newUser = new User();
-                        newUser.user_id = profile.id;
+                        newUser.auth_id = profile.id;
                         newUser.token = accessToken;
                         newUser.name = profile.name.givenName + ' ' + profile.name.familyName;
                         newUser.email = profile.emails[0].value;
@@ -117,9 +122,9 @@ module.exports = function(passport) {
 
                         newUser.save(function(err){
                             if(err)
-                                return done(err, null);
+                                done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         });
-                        return done(null, newUser);
+                        done(null, newUser, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                     }
                 });
 	    	});
@@ -135,9 +140,9 @@ module.exports = function(passport) {
         },
         function(req, accessToken, refreshToken, profile, done) {
 	    	process.nextTick(function(){
-                User.findOne({'user_id': profile.id, 'auth': 'google'}, function(err, user){
+                User.findOne({'auth_id': profile.id, 'auth': 'google'}, function(err, user){
                     if(err)
-                        return done(err);
+                        done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                     else if(user){
                         user.token = accessToken;
                         user.name = profile.displayName;
@@ -145,13 +150,13 @@ module.exports = function(passport) {
                         user.image = profile.photos ? profile.photos[0].value : undefined;
                         user.save(function(err){
                             if(err)
-                                return done(err, null);
+                                done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         });
-                        return done(null, user);
+                        done(null, user, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                     }
                     else {
                         var newUser = new User();
-                        newUser.user_id = profile.id;
+                        newUser.auth_id = profile.id;
                         newUser.token = accessToken;
                         newUser.name = profile.displayName;
                         newUser.email = profile.emails[0].value;
@@ -160,9 +165,9 @@ module.exports = function(passport) {
 
                         newUser.save(function(err){
                             if(err)
-                                return done(err, null);
+                                done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         });
-                        return done(null, newUser);
+                        done(null, newUser, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                     }
                 });
             });
@@ -186,9 +191,9 @@ module.exports = function(passport) {
 	    	process.nextTick(function(){
                 LinkedInStrategy.getLiteProfile(accessToken, function(err, profile){
 //                    console.log('profile' + JSON.stringify(profile));
-                    User.findOne({'user_id': profile.linkedIn.id, 'auth': 'linkedin'}, function(err, user){
+                    User.findOne({'auth_id': profile.linkedIn.id, 'auth': 'linkedin'}, function(err, user){
                         if(err)
-                            return done(err);
+                            done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                         else if(user){
                             user.token = accessToken;
                             user.name = profile.firstName + ' ' + profile.lastName;
@@ -196,13 +201,13 @@ module.exports = function(passport) {
                             user.image = profile.profilePicture;
                             user.save(function(err){
                                 if(err)
-                                    return done(err, null);
+                                    done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                             });
-                            return done(null, user);
+                            done(null, user, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                         }
                         else {
                             var newUser = new User();
-                            newUser.user_id = profile.linkedIn.id;
+                            newUser.auth_id = profile.linkedIn.id;
                             newUser.token = accessToken;
                             newUser.name = profile.firstName + ' ' + profile.lastName;
                             newUser.email = profile.email;
@@ -211,9 +216,10 @@ module.exports = function(passport) {
 
                             newUser.save(function(err){
                                 if(err)
-                                    return done(err, null);
+                                    done(err, false,  req.flash('errorMessage', 'Erreur interne. Veuillez réessayer ultérieurement'));
                             });
-                            return done(null, newUser);
+                            done(null, newUser, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
+                            done(null, newUser, req.flash('successMessage', 'Bienvenue, ' + user.name + ' !'));
                         }
                     });
                 });

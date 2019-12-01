@@ -1,0 +1,65 @@
+<!-- views/pages/profile.ejs -->
+<!doctype html>
+<html>
+    <%- include(locals.rootPath + '/partials/head') %>
+    <body>
+        <%- include(locals.rootPath + '/partials/header') %>
+
+            <div class="page-header text-center">
+                <h1 class="title"><span class="fa fa-user"></span> Profil</h1>
+                <a href="/auth/logout" class="btn btn-default btn-sm">Déconnexion</a>
+            </div>
+            
+            <div class="row">
+
+                <!-- show any messages that come back with authentication -->
+                <% if(typeof(error) != 'undefined' && error.length > 0) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                <% if(typeof(success) != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success"><%= success %></div>
+                <% } %>
+              
+                <div class="col-sm-6">
+                    <div class="well">
+                      
+                        <% if(locals.user) { %>
+                            <% if(locals.user.auth == 'local') { %>
+                                <!-- LOCAL INFORMATION -->
+                                <h2 class="text"><span class="fa fa-user"></span> Local</h2>
+                                <p><a href="/profile/infos" class="btn btn-default btn-sm">Modifier mes informations personnelles</a></p>
+                            <% } %>
+                            <% if(locals.user.auth == 'facebook') { %>
+                                <!-- FACEBOOK INFORMATION -->
+                                <h2 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h2>
+                            <% } %>
+                            <% if(locals.user.auth == 'google') { %>
+                                <!-- GOOGLE INFORMATION -->
+                                <h2 class="text-danger"><span class="fa fa-google-plus"></span> Google</h2>
+                            <% } %>
+                            <% if(locals.user.auth == 'linkedin') { %>
+                                <!-- LINKEDIN INFORMATION -->
+                                <h2 class="text-info"><span class="fa fa-linkedin"></span> LinkedIn</h2>
+                            <% } %>
+                        <% } %>
+                        <p>
+<!--                            <strong>id</strong>: <%= locals.user.user_id %><br>-->
+                            <strong>Email</strong> : <%= locals.user.email %><br>
+                            <strong>Nom</strong> : <%= locals.user.name %><br>
+                            <% if (typeof(locals.user.image) != 'undefined') { %>
+                                <strong>Image de profil</strong> : <br>
+                                <div class="square-img">
+                                    <img src="<%= locals.user.image %>" />
+                                </div>
+                            <% } else { %>
+                                <p><a href="/profile/infos" class="btn btn-default btn-sm">Ajouter une image de profil</a></p>
+                            <% } %>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+        <%- include(locals.rootPath + '/partials/footer') %>
+    </body>
+</html>

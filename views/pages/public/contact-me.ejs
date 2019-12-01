@@ -10,8 +10,11 @@
                 <h1><span class="fa fa-sign-in"></span> Contactez-moi</h1>
 
                 <!-- show any messages that come back with authentication -->
-                <% if (typeof(message) != 'undefined' && message.length > 0) { %>
-                    <div class="alert alert-danger"><%= message %></div>
+                <% if(typeof(error) != 'undefined' && error.length > 0) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                <% if(typeof(success) != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success"><%= success %></div>
                 <% } %>
                 
                 <% if(locals.user) { %>
@@ -25,6 +28,7 @@
                     <button type="submit" class="btn btn-warning btn-lg">Envoyer</button>
                 </form>
                 <% } else { %>
+                <h2>Connectez-vous pour me contacter !</h2>
                 
                 <p>Pas encore de compte ? <a href="/auth/signup">S'enregistrer</a></p>
                 <p>Ami de Facebok ou de Google ? <a href="/auth">Se connecter</a></p>

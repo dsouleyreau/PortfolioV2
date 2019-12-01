@@ -6,7 +6,16 @@
         <%- include(locals.rootPath + '/partials/header') %>
             
             <div class="jumbotron text-center">
-                <h2><span class="fa fa-lock"></span> Authentification</h2>
+                <h1><span class="fa fa-lock"></span> Authentification</h1>
+
+                <!-- show any messages that come back with authentication -->
+                <% if(typeof(error) != 'undefined' && error.length > 0) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                <% if(typeof(success) != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success"><%= success %></div>
+                <% } %>
+              
                 <p>Se connecter ou s'enregistrer avec :</p>
                 <div class="login">
                     <a href="/auth/login" class="btn btn-default local-login"><span class="fa fa-user"></span> Connexion Locale</a>

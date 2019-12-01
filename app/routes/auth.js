@@ -1,60 +1,69 @@
 module.exports = function(router, passport){
 
-	//localhost:8080/auth/
-    router.use(function(req, res, next){
-        if(req.isAuthenticated() && req.path != '/logout')
-            res.redirect('/profile');
-        else
-            next();
+  router.use(function(req, res, next){
+    if(req.isAuthenticated() && req.path != '/logout')          // Si deja authentifie
+      res.redirect('/profile');                                 // redirige vers le profil
+    else
+      next();                                                   // Sinon, continue
+  });
+
+  router.get('/', function(req, res){                           // Rendu de la page '/auth'
+    res.render('pages/auth/auth.ejs', {
+      error: req.flash('errorMessage')[0], success: req.flash('successMessage')[0]
     });
-    
-	router.get('/', function(req, res){
-		res.render('pages/auth/auth.ejs');
-	});
-	
-	//localhost:8080/auth/login
-	router.get('/login', function(req, res){
-		res.render('pages/auth/login.ejs', { message: req.flash('loginMessage') });
-	});
+  });
 
-	router.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/profile',
-		failureRedirect: '/auth/login',
-		failureFlash: true
-	}));
+  router.get('/login', function(req, res){                      // Rendu de la page '/login' avec message flash
+    res.render('pages/auth/login.ejs', {
+      error: req.flash('errorMessage')[0], success: req.flash('successMessage')[0]
+    });
+  });
+  
+  router.post('/login', passport.authenticate('local-login', {  // /login POST => tentative d'authentification locale
+    successRedirect: '/profile',                                // URL de redirection si l'authentification est validee
+    failureRedirect: '/auth/login',                             // URL de redirection si l'authentification echoue
+    failureFlash: true                                          // Autorise le message flash si l'authentification echoue
+  }));
 
-	//localhost:8080/auth/signup
-	router.get('/signup', function(req, res){
-		res.render('pages/auth/signup.ejs', { message: req.flash('signupMessage') });
-	});
+  router.get('/signup', function(req, res){
+    res.render('pages/auth/signup.ejs', {
+      error: req.flash('errorMessage')[0], success: req.flash('successMessage')[0]
+    });
+  });
 
 
-	router.post('/signup', passport.authenticate('local-signup', {
-		successRedirect: '/profile',
-		failureRedirect: '/auth/signup',
-		failureFlash: true
-	}));
-	
-	router.get('/facebook', passport.authenticate('facebook',  {scope: ['email']}));
+  router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth/signup',
+    failureFlash: true
+  }));
 
-	router.get('/facebook/callback', 
-	  passport.authenticate('facebook', { successRedirect: '/profile',
-	                                      failureRedirect: '/' }));
+  router.get('/facebook', passport.authenticate('facebook'));
 
-	router.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+  router.get('/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth'
+  }));
 
-	router.get('/google/callback', 
-	  passport.authenticate('google', { successRedirect: '/profile',
-	                                      failureRedirect: '/' }));
+  router.get('/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+  }));
 
-	router.get('/linkedin', passport.authenticate('linkedin'));
+  router.get('/google/callback', 
+  passport.authenticate('google', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth'
+  }));
 
-	router.get('/linkedin/callback', 
-	  passport.authenticate('linkedin', { successRedirect: '/profile',
-	                                      failureRedirect: '/' }));
+  router.get('/linkedin', passport.authenticate('linkedin'));
 
-	router.get('/logout', function(req, res){
-		req.logout();
-		res.redirect('/auth');
-	});
+  router.get('/linkedin/callback', passport.authenticate('linkedin', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth'
+  }));
+
+  router.get('/logout', function(req, res){
+    req.logout();                                                 // Deconnexion de la session
+    res.redirect('/auth');                                        // Redirection vers la page de connexion
+  });
 };

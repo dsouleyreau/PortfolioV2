@@ -1,20 +1,26 @@
-In this folder, you have to include ;
-	ca_bundle.crt
-	certificate.crt
-	private.key
-	secrets.js
+In this folder, you have to include :
+  ca_bundle.crt
+  certificate.crt
+  private.key
+  secrets.js
 
 secrets.js is built like this :
 
 module.exports = {
-    hashingSecret: '<local secret>',
-    facebook : {
-        clientSecret: '<facebook app clientSecret>'
-    },
-    google : {
-        clientSecret: '<google app clientSecret>'
-    }
-    linkedin : {
-        clientSecret: '<linkedin app clientSecret>'
-    }
+  'hashingSecret': '<local secret>',
+  'facebook' : {
+    'clientID': '<facebook app clientID>',
+    'clientSecret': '<facebook app clientSecret>',
+    'callbackURL': '<facebook app callback URL>'
+  },
+  'google' : {
+    'clientID': '<google app clientID>',
+    'clientSecret': '<google app clientSecret>',
+    'callbackURL': '<google app callback URL>'
+  }
+  'linkedin' : {
+    'clientID': '<linkedIn app clientID>',
+    'clientSecret': '<linkedIn app clientSecret>',
+    'callbackURL': '<linkedIn app callback URL>'
+  }
 };

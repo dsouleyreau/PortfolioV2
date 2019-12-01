@@ -33,7 +33,7 @@
                     <% } else { %>
                         <a class="btn btn-default action-button user" href='/profile'>
                             <% if (typeof(locals.user.image) != 'undefined') { %>
-                                <img src="<%= locals.user.image %>" />
+                                <img class="img-circle img-thumbnail" src="<%= locals.user.image %>" />
                             <% } %>
                             <%= locals.user.name %>
                         </a>

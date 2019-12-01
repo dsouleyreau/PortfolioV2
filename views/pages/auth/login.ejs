@@ -10,8 +10,11 @@
                 <h1><span class="fa fa-sign-in"></span> Page de connexion</h1>
 
                 <!-- show any messages that come back with authentication -->
-                <% if (message.length > 0) { %>
-                    <div class="alert alert-danger"><%= message %></div>
+                <% if(typeof(error) != 'undefined' && error.length > 0) { %>
+                    <div class="alert alert-danger"><%= error %></div>
+                <% } %>
+                <% if(typeof(success) != 'undefined' && success.length > 0) { %>
+                    <div class="alert alert-success"><%= success %></div>
                 <% } %>
 
                 <!-- LOGIN FORM -->
